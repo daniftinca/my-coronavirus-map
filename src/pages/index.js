@@ -314,6 +314,11 @@ const IndexPage = () => {
             info.update(layer.feature.properties);
         }
 
+        function zoomAndHighlight(e){
+            highlightFeature(e);
+            zoomToFeature(e);
+        }
+
         function zoomToFeature(e) {
             map.fitBounds(e.target.getBounds());
         }
@@ -323,8 +328,8 @@ const IndexPage = () => {
             layer.on({
                 mouseover: highlightFeature,
                 mouseout: resetHighlight,
-                click: zoomToFeature,
-                tap: highlightFeature
+                click: zoomAndHighlight,
+                tap: zoomAndHighlight
             });
         }
 
