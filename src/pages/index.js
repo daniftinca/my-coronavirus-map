@@ -4,7 +4,6 @@ import {Helmet} from 'react-helmet';
 import Layout from 'components/Layout';
 import Map from 'components/Map';
 import axios from 'axios';
-import gatsby_astronaut from 'assets/images/gatsby-astronaut.jpg';
 
 const LOCATION = {
     lat: 0,
@@ -12,24 +11,24 @@ const LOCATION = {
 };
 const CENTER = [LOCATION.lat, LOCATION.lng];
 const DEFAULT_ZOOM = 2;
-const ZOOM = 10;
-
-const timeToZoom = 2000;
-const timeToOpenPopupAfterZoom = 4000;
-const timeToUpdatePopupAfterZoom = timeToOpenPopupAfterZoom + 3000;
-
-const popupContentHello = `<p>Hello 👋</p>`;
-const popupContentGatsby = `
-  <div class="popup-gatsby">
-    <div class="popup-gatsby-image">
-      <img class="gatsby-astronaut" src=${gatsby_astronaut} />
-    </div>
-    <div class="popup-gatsby-content">
-      <h1>Gatsby Leaflet Starter</h1>
-      <p>Welcome to your new Gatsby site. Now go build something great!</p>
-    </div>
-  </div>
-`;
+// const ZOOM = 10;
+//
+// const timeToZoom = 2000;
+//const timeToOpenPopupAfterZoom = 4000;
+// const timeToUpdatePopupAfterZoom = timeToOpenPopupAfterZoom + 3000;
+//
+// const popupContentHello = `<p>Hello 👋</p>`;
+// const popupContentGatsby = `
+//   <div class="popup-gatsby">
+//     <div class="popup-gatsby-image">
+//       <img class="gatsby-astronaut" src=${gatsby_astronaut} />
+//     </div>
+//     <div class="popup-gatsby-content">
+//       <h1>Gatsby Leaflet Starter</h1>
+//       <p>Welcome to your new Gatsby site. Now go build something great!</p>
+//     </div>
+//   </div>
+// `;
 
 function getColor(d) {
     d = parseInt(d);
@@ -48,7 +47,7 @@ function getColor(d) {
 
 
 const IndexPage = () => {
-    const markerRef = useRef();
+
 
     /**
      * mapEffect
@@ -271,7 +270,7 @@ const IndexPage = () => {
 
         var info = L.control();
 
-        info.onAdd = function (map) {
+        info.onAdd = function () {
             this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
             this.update();
             return this._div;
@@ -324,7 +323,8 @@ const IndexPage = () => {
             layer.on({
                 mouseover: highlightFeature,
                 mouseout: resetHighlight,
-                click: zoomToFeature
+                click: zoomToFeature,
+                tap: highlightFeature
             });
         }
 
